@@ -1,6 +1,7 @@
 <?php
 include_once('../models/userModel.php');
 include_once('responseHttp.php');
+include_once('../auth/auth.php');
 class userController extends responseHttp{
     function register ($data){
         $userModel = new userModel();
@@ -19,6 +20,22 @@ class userController extends responseHttp{
            $this->statusSuccess(200,"login success", $array["data"]);
         }else{
             $this->status400($array["message"]);
+        }
+    } 
+    function updateUser($data){
+        $userModel = new userModel();
+        $auth = new auth();
+        $status = $auth->authByToken();
+        if($status['status']){
+            $array = $userModel->updateUser($data, $status['id']);
+        if($array["status"]){
+           $this->statusSuccess(200,$array["message"]);
+        }else{
+            $this->status400($array["message"]);
+        }
+        }else{
+            echo $status['message'];
+            exit;
         }
     } 
 }

@@ -25,6 +25,11 @@ class responseHttp{
         ];
         echo json_encode($array);
     }
+
+    function status401(){
+        http_response_code(401);
+        echo 'Usted no tiene permisos';
+    }
 }
 
 ?>

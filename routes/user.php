@@ -14,7 +14,9 @@ if($method == 'POST'){
     exit;
 }
 if($method == 'PATCH'){
-    echo 'Hola mundo desde patch';
+    $user = new userController();
+    $data = (json_decode(file_get_contents('php://input'),true));
+    $user->updateUser($data);
     exit;
 }
 if($method == 'DELETE'){
