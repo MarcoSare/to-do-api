@@ -26,9 +26,14 @@ class responseHttp{
         echo json_encode($array);
     }
 
-    function status401(){
+    function status401($message){
         http_response_code(401);
-        echo 'Usted no tiene permisos';
+        $array = [
+            "message" => $message,
+            "status" => "Error",
+            "code" => "400"
+        ];
+        echo json_encode($array);
     }
 }
 

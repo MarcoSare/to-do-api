@@ -38,6 +38,40 @@ class userController extends responseHttp{
             exit;
         }
     } 
+
+    function deleteUser(){
+        $userModel = new userModel();
+        $auth = new auth();
+        $status = $auth->authByToken();
+        if($status['status']){
+            $array = $userModel->deleteUser($status['id']);
+        if($array["status"]){
+           $this->statusSuccess(200,$array["message"]);
+        }else{
+            $this->status400($array["message"]);
+        }
+        }else{
+            echo $status['message'];
+            exit;
+        }
+    } 
+
+    function getUser(){
+        $userModel = new userModel();
+        $auth = new auth();
+        $status = $auth->authByToken();
+        if($status['status']){
+            $array = $userModel->getUser($status['id']);
+        if($array["status"]){
+           $this->statusSuccess(200,"Request success",$array["data"] );
+        }else{
+            $this->status400($array["message"]);
+        }
+        }else{
+            echo $status['message'];
+            exit;
+        }
+    } 
 }
 
 

@@ -81,6 +81,47 @@ class userModel extends dataBase{
         }
     }
 
+    function deleteUser($id){
+        try{
+            $param="";
+            $param.= "'".$id."'";
+            $this->query("call deleted_user_by_id(".$param.");");
+            $array = array(
+                "status" => true,
+                "message" => 'El usuario se ha eliminado correctamente' 
+            );
+            return $array;
+        }
+        catch(Exception $e){
+            $array = array(
+                "status" => false,
+                "message" => $e->getMessage()
+            );
+            return $array;
+        }
+    }
+
+    function getUser($id){
+        try{
+            $param="";
+            $param.= "'".$id."'";
+            $this->query("call get_user_by_id(".$param.");");
+            $assoc = $this->getArrayQuery();
+            $array = array(
+                "status" => true,
+                "data" => $assoc
+            );
+            return $array;
+        }
+        catch(Exception $e){
+            $array = array(
+                "status" => false,
+                "message" => $e->getMessage()
+            );
+            return $array;
+        }
+    }
+
 }
 
 ?>

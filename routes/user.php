@@ -4,7 +4,8 @@ include_once('../controllers/userController.php');
 $method = $_SERVER['REQUEST_METHOD'];
 
 if($method == 'GET'){
-    echo 'Hola mundo desde get';
+    $user = new userController();
+    $user->getUser();
     exit;
 }
 if($method == 'POST'){
@@ -20,6 +21,7 @@ if($method == 'PATCH'){
     exit;
 }
 if($method == 'DELETE'){
-    echo 'Hola mundo desde delete';
+    $user = new userController();
+    $user->deleteUser();
     exit;
 }
