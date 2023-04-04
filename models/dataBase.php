@@ -25,6 +25,14 @@ class dataBase{
         return $array;
     }
 
+    function getArray(){
+        $array= array();
+        while($row=mysqli_fetch_assoc($this->restQuery)){
+            $array[] = $row;
+        }
+        return $array;
+    }
+
     function close(){
         mysqli_close($this->conn);
     }
