@@ -45,5 +45,42 @@ class proyectController extends responseHttp{
             $this->status400($status["message"]);
         }
        }
+
+       function updateProyect ($data){
+        $proyModel = new proyectModel();
+        $auth = new auth();
+        $status = $auth->authByToken();
+        if($status['status']){
+            $array = $proyModel->updateProyect($data, $status['id']);
+        if($array["status"]){
+           $this->statusSuccess(200,$array["message"]);
+        }else{
+            if($array["message"] == "USTED NO TIENE PERMISOS")
+            $this->status401($array["message"]);
+            else
+            $this->status400($array["message"]);
+        }
+        }else{
+            $this->status400($status["message"]);
+        }
+       }
    
+       function deleteProyect ($data){
+        $proyModel = new proyectModel();
+        $auth = new auth();
+        $status = $auth->authByToken();
+        if($status['status']){
+            $array = $proyModel->deleteProyect($data, $status['id']);
+        if($array["status"]){
+           $this->statusSuccess(200,$array["message"]);
+        }else{
+            if($array["message"] == "USTED NO TIENE PERMISOS")
+            $this->status401($array["message"]);
+            else
+            $this->status400($array["message"]);
+        }
+        }else{
+            $this->status400($status["message"]);
+        }
+       }
 }

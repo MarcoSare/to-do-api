@@ -69,4 +69,50 @@ class proyectModel extends dataBase {
         }
     }
 
+    function updateProyect($data, $idUser){
+        try{
+            $param="";
+            $param.= "'".$data['id']."'";
+            $param.= ",'".$idUser."'";
+            $param.= ",'".$data['name']."'";
+            $param.= ",'".$data['description']."'";
+            $param.= ",'".$data['image']."'";
+            //echo $param;
+            //exit;
+            $this->query("call update_proyect(".$param.");");
+            $array = array(
+                "status" => true,
+                "message" => 'El proyecto se ha actualizado correctamente' 
+            );
+            return $array;
+        }
+        catch(Exception $e){
+            $array = array(
+                "status" => false,
+                "message" => $e->getMessage()
+            );
+            return $array;
+        }
+    }
+
+    function deleteProyect($data, $idUser){
+        try{
+            $param="";
+            $param.= "'".$data['id']."'";
+            $param.= ",'".$idUser."'";
+            $this->query("call delete_proyect(".$param.");");
+            $array = array(
+                "status" => true,
+                "message" => 'El proyecto se ha eliminado correctamente' 
+            );
+            return $array;
+        }
+        catch(Exception $e){
+            $array = array(
+                "status" => false,
+                "message" => $e->getMessage()
+            );
+            return $array;
+        }
+    }
 }

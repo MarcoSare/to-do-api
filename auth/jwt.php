@@ -8,7 +8,7 @@ class jsonWebToken{
         $time = time();
         $token = array(
             "iat" => $time,
-            "exp" => $time + (60*10),
+            "exp" => $time + (60*60*2),
             "data" => $data
         );
         $jwt = JWT::encode($token, "190801" , "HS256");

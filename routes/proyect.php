@@ -20,8 +20,15 @@ if($method == 'POST'){
     exit;
 }
 if($method == 'PATCH'){
+    $proyect = new proyectController();
+    $data = (json_decode(file_get_contents('php://input'),true));
+    $proyect->updateProyect($data);
+    exit;
    
 }
 if($method == 'DELETE'){
-  
+    $proyect = new proyectController();
+    $data = (json_decode(file_get_contents('php://input'),true));
+    $proyect->deleteProyect($data);
+    exit;
 }
