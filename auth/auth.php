@@ -10,13 +10,14 @@ class auth extends responseHttp{
             $decode = $jwtObj->decodeToken($token);
             $array = json_decode(json_encode($decode,true),true);
             $data = $array["data"];
-            $this->isExp($data);
+            $this->isExp($array);
             $retorno = array(
                 "status" => true,
                 "id" => $data["id"]
             );
             return $retorno;
         }catch(Exception $e){
+            echo $e->getMessage();
             $this->status401("Usted no tiene permisos");
             exit;
         }
@@ -39,7 +40,7 @@ class auth extends responseHttp{
 
     function isExp($data){
         $time = time(); 
-        if($data["exp"] > $time){
+        if($data["exp"] < $time){
             $this->status401("Token expirado");
             exit;
         }
